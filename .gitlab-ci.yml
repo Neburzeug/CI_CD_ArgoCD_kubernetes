@@ -20,7 +20,9 @@ deploy-dev:
     - kubectl config use-context ${CONTEXT_NAME}
     - kubectl port-forward svc/argocd-server -n argocd 8080:443 2>&1 >/dev/null &
     - kubectl get nodes
+    - ps -ef | grep argo
     - sleep 2s
+    - argocd login localhost:8080 --username ${ARGOCD_USERNAME} --password ${ARGOCD_PASSWORD} --insecure
     - argocd app set argo-multi-container-app-k8s -p ports.client=3000
     - argocd app set argo-multi-container-app-k8s -p ports.server=5000
     - argocd app set argo-multi-container-app-k8s -p ports.postgres=5432
