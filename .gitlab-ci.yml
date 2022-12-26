@@ -19,6 +19,7 @@ deploy-dev:
     - kubectl config set-context ${CONTEXT_NAME} --cluster=k8s --user=gitlab
     - kubectl config use-context ${CONTEXT_NAME}
     - kubectl port-forward svc/argocd-server -n argocd 8080:443 2>&1 >/dev/null &
+    - kubectl get nodes
     - sleep 2s
     - argocd app set argo-multi-container-app-k8s -p ports.client=3000
     - argocd app set argo-multi-container-app-k8s -p ports.server=5000
