@@ -1,0 +1,16 @@
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: argo-multi-container-app-k8s
+  namespace: argocd
+spec:
+  project: default
+  source: 
+    repoURL: https://gitlab.com/mauricio.ortiz1/ci_cd_argocd_kubernetes.git
+    targetRevision: HEAD
+    path: argo-test/
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: default
+---
